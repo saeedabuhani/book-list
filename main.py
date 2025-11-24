@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException
+# This is a test comment for Git exercise
 
 app = FastAPI()
 # books = [

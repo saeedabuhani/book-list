@@ -1,13 +1,25 @@
 from fastapi import FastAPI, HTTPException
 
 app = FastAPI()
+books = [
+    {"id": 1, "title": "Clean Code", "author": "Robert C. Martin"},
+    {"id": 2, "title": "The Pragmatic Programmer", "author": "Andrew Hunt"},
+    {"id": 3, "title": "Introduction to Algorithms", "author": "Thomas H. Cormen"},
+    {"id": 4, "title": "Python Crash Course", "author": "Eric Matthes"},
+    {"id": 5, "title": "Fluent Python", "author": "Luciano Ramalho"},
+    {"id": 6, "title": "Design Patterns", "author": "Erich Gamma"},
+    {"id": 7, "title": "You Don't Know JS", "author": "Kyle Simpson"},
+    {"id": 8, "title": "The Clean Coder", "author": "Robert C. Martin"},
+    {"id": 9, "title": "Soft Skills", "author": "John Sonmez"},
+    {"id": 10, "title": "Automate the Boring Stuff with Python", "author": "Al Sweigart"}
+]
 
-books = []
-counter = 1
+counter = 6
 
 @app.get("/books")
 def get_books():
     return books
+
 
 @app.get("/books/{book_id}")
 def get_book(book_id: int):
@@ -15,6 +27,7 @@ def get_book(book_id: int):
         if book["id"] == book_id:
             return book
     raise HTTPException(status_code=404, detail="Book not found")
+
 
 @app.post("/books")
 def add_book(book: dict):
@@ -27,6 +40,7 @@ def add_book(book: dict):
     books.append(new_book)
     counter += 1
     return new_book
+
 
 @app.delete("/books/{book_id}")
 def delete_book(book_id: int):
